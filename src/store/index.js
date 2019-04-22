@@ -5,6 +5,7 @@ import users from './modules/users'
 import institutions from './modules/institutions'
 import manages from './modules/manages'
 import offers from './modules/offers'
+import people from './modules/people'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
@@ -38,6 +39,7 @@ export default new Vuex.Store({
     institutionsDB: state => state.db.collection('institutions'),
     managesDB: state => state.db.collection('manages'),
     offersDB: state => state.db.collection('offers'),
+    peopleDB: state => state.db.collection('people'),
   },
   mutations: {
     setCurrentExecution(state, { execution }) {
@@ -52,5 +54,6 @@ export default new Vuex.Store({
     institutions,
     manages,
     offers,
+    people,
   },
 })
