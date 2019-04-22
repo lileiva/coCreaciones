@@ -52,7 +52,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import randomPassword from '../functions/RandomPassword'
+import randomPassword from '../../functions/RandomPassword'
 
 export default {
   name: 'AdminFormCreateUser',

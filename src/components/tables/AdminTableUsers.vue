@@ -2,31 +2,7 @@
   <div>
     <v-card>
       <v-card-title>
-        <v-dialog
-          v-model="dialog"
-          max-width="500px"
-        >
-          <v-btn
-            slot="activator"
-            color="primary"
-            dark
-            class="mb-2"
-          >
-            Crear Usuario
-          </v-btn>
-          <v-card>
-            <v-card-title>
-              <span class="headline">Nuevo usuario</span>
-            </v-card-title>
-
-            <v-card-text>
-              <AdminFormCreateUser
-                @closeDialog="close"
-                @saveUser="close"
-              />
-            </v-card-text>
-          </v-card>
-        </v-dialog>
+        <CreateInstanceButton instance="Usuario" />
         <v-spacer /><v-spacer />
         <v-text-field
           v-model="search"
@@ -123,13 +99,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import AdminFormCreateUser from './AdminFormCreateUser.vue'
-import { UserHeaders } from '../data'
+import { UserHeaders } from '../../data'
+import CreateInstanceButton from '../common_components/CreateInstanceButton.vue'
 
 export default {
-  name: 'AdminTableSamples',
+  name: 'AdminTableUserSamples',
   components: {
-    AdminFormCreateUser,
+    CreateInstanceButton,
   },
   data() {
     return {
@@ -211,6 +187,7 @@ export default {
 }
 </script>
 
+<!-- Usando !important ? Really? xD -->
 <style scoped>
 .v-icon {
   display: inline-flex !important;
