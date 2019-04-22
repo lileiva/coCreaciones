@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
 import users from './modules/users'
+import institutions from './modules/institutions'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
@@ -32,6 +33,7 @@ export default new Vuex.Store({
   },
   getters: {
     usersDB: state => state.db.collection('users'),
+    institutionsDB: state => state.db.collection('institutions'),
   },
   mutations: {
     setCurrentExecution(state, { execution }) {
@@ -43,5 +45,6 @@ export default new Vuex.Store({
   },
   modules: {
     users,
+    institutions,
   },
 })
