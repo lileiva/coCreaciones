@@ -54,16 +54,16 @@
           slot-scope="props"
         >
           <td class="text-xs-center">
-            {{ props.item.nick }}
+            {{ props.item.name }}
           </td>
           <td class="text-xs-center">
             {{ props.item.email }}
           </td>
           <td class="text-xs-center">
-            {{ props.item.company }}
+            {{ props.item.degree }}
           </td>
           <td class="text-xs-center">
-            {{ props.item.role }}
+            {{ props.item.CV? props.item.CV[0]: '' }}
           </td>
           <td
             slot="activator"

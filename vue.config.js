@@ -1,7 +1,14 @@
 module.exports = {
-  outputDir: 'public',
+  outputDir: undefined,
 
   pwa: {
-    name: 'Pome',
+    name: 'coCreaciones',
   },
+
+  publicPath: undefined,
+  assetsDir: undefined,
+  runtimeCompiler: undefined,
+  productionSourceMap: undefined,
+  parallel: undefined,
+  css: undefined,
 }

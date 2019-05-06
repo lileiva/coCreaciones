@@ -1,15 +1,17 @@
 {
-  "name": "coCreaciones",
+  "name": "cocreaciones",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "test": "jest"
   },
   "dependencies": {
     "core-js": "^3.0.1",
+    "eslint-plugin-promise": "^4.1.1",
     "firebase": "^5.8.4",
     "firebase-tools": "^6.6.0",
     "lodash": "^4.17.11",
@@ -28,13 +30,14 @@
     "@vue/cli-plugin-unit-mocha": "^3.4.0",
     "@vue/cli-service": "^3.6.0",
     "@vue/eslint-config-airbnb": "^4.0.0",
-    "@vue/test-utils": "^1.0.0-beta.20",
+    "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-vue": "^5.2.2",
+    "jest": "^24.7.1",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
@@ -42,8 +45,9 @@
     "stylus-loader": "^3.0.1",
     "tar": "^4.4.8",
     "vue-cli-plugin-vuetify": "^0.4.6",
+    "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.5.21",
-    "vuetify-loader": "^1.0.5"
+    "vuetify-loader": "^1.2.2"
   },
   "eslintConfig": {
     "root": true,
@@ -81,5 +85,18 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }

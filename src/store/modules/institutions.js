@@ -8,7 +8,7 @@ const mutations = {
 }
 const actions = {
   async fetchInstitutions({ dispatch, rootGetters }) {
-    return rootGetters.instituionsDB
+    return rootGetters.institutionsDB
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -17,10 +17,10 @@ const actions = {
       })
   },
   async fetchInstitution({ state, commit, rootGetters }, { id }) {
-    if (state.instituions[id]) {
-      return state.instituions[id]
+    if (state.institutions[id]) {
+      return state.institutions[id]
     }
-    return rootGetters.instituionsDB.doc(id)
+    return rootGetters.institutionsDB.doc(id)
       .get()
       .then((doc) => {
         if (doc.exists) {
