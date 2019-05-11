@@ -1,13 +1,12 @@
 <template>
   <div>
-    <h1>Ofertas</h1>
-    <br>
     <div class="columns">
       <div class="column">
         <OfferCard
           v-for="offer in offers"
           :key="offer.title"
           :offer="offer"
+          :institutions="institutions"
         />
       </div>
     </div>
@@ -30,25 +29,34 @@ export default {
     },
   },
   computed: {
-    items() {
-      return Object.keys(this.offers)
-        .map(
-          key => Object.assign({}, this.offers[key]),
-        )
-    },
-    ...mapState('offers', [
-      'offers',
-    ]),
+    ...mapState('offers', ['offers']),
+    ...mapState('institutions', ['institutions']),
   },
+
   created() {
     this.fetchOffers().then(() => {
-      setTimeout(() => { this.loading = false }, 500)
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
+    this.fetchInstitutions().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   },
   methods: {
-    ...mapActions('offers', [
-      'fetchOffers',
-    ]),
+    ...mapActions('offers', ["fetchOffers('this.institutionID')"]),
+    ...mapActions('institutions', ['fetchInstitutions']),
+    offersByInstitution(id) {
+      const l = []
+      this.offers.forEach((offer) => {
+        if (offer.institution_id === id) {
+          l.push(offer)
+        }
+      })
+      return l
+    },
   },
 }
 </script>
