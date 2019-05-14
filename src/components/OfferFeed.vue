@@ -22,12 +22,7 @@ export default {
   components: {
     OfferCard,
   },
-  props: {
-    offers: {
-      type: Array,
-      default: () => [],
-    },
-  },
+  props: {},
   computed: {
     ...mapState('offers', ['offers']),
     ...mapState('institutions', ['institutions']),
@@ -46,17 +41,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions('offers', ["fetchOffers('this.institutionID')"]),
+    ...mapActions('offers', ['fetchOffers']),
     ...mapActions('institutions', ['fetchInstitutions']),
-    offersByInstitution(id) {
-      const l = []
-      this.offers.forEach((offer) => {
-        if (offer.institution_id === id) {
-          l.push(offer)
-        }
-      })
-      return l
-    },
   },
 }
 </script>

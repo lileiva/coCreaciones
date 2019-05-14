@@ -46,19 +46,28 @@
       </div>
     </div>-->
 
-    <OfferFeed msg="Welcome to Your Vue.js App" />
+    <!-- <OfferFeed msg="Welcome to Your Vue.js App"/> -->
+
+    <div class="column">
+      <OfferCard
+        v-for="_offer in filteredInstitutions"
+        :key="_offer.title"
+        :offer="_offer"
+        :institutions="institutions"
+      />
+    </div>
   </div>
 </template>
 
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import OfferFeed from '../components/OfferFeed.vue'
+import OfferCard from '../components/OfferCard.vue'
 
 export default {
   name: 'OfferShow',
   components: {
-    OfferFeed,
+    OfferCard,
   },
   data() {
     return {}
@@ -72,14 +81,14 @@ export default {
     institution() {
       return this.institutions[+this.offer.institution_id]
     },
-    filterOffersByInstitution(id) {
+    filteredInstitutions() {
       const l = []
-      // console.log("\n");
-      // console.log(this.offers);
-      // console.log("\n");
-      Object.keys(this.offers).forEach(function (key) {
-        if (this.offers[key].institution_id === id) {
-          l.push(this.offers[key])
+      Object.entries(this.offers).forEach(([id, offer]) => {
+        if (
+          offer.institution_id === +this.institution.id
+          && id !== this.offer.id
+        ) {
+          l.push(offer)
         }
       })
       return l
@@ -91,10 +100,9 @@ export default {
         this.loading = false
       }, 500)
     })
-    this.fetchOffers().then(() => {
-      setTimeout(() => {
+    this.fetchOffers().then(async () => {
+      setTimeout(async () => {
         this.loading = false
-        this.filteredOffers = this.filterOffersByInstitution(this.offer.id)
       }, 500)
     })
   },
