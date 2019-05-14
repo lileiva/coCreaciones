@@ -1,6 +1,5 @@
 <template>
-  <!-- @submit="submitOffer" -->
-  <form>
+  <form @submit.prevent="handleSubmit">
     <v-text-field
       v-model="name"
       :error-messages="nameErrors"
@@ -35,25 +34,7 @@
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
     />
-    <!-- <v-select
-      v-model="select"
-      :items="items"
-      :error-messages="selectErrors"
-      label="Item"
-      required
-      @change="$v.select.$touch()"
-      @blur="$v.select.$touch()"
-    ></v-select>-->
-    <!-- <v-checkbox
-      v-model="checkbox"
-      :error-messages="checkboxErrors"
-      label="Do you agree?"
-      required
-      @change="$v.checkbox.$touch()"
-      @blur="$v.checkbox.$touch()"
-    ></v-checkbox>-->
-
-    <v-btn @click="submit">
+    <v-btn type="submit">
       crear
     </v-btn>
     <v-btn @click="clear">
@@ -63,6 +44,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 
@@ -83,6 +65,11 @@ export default {
   },
 
   data: () => ({
+    // currentUser: {
+    //   id: 4,
+    //   institutionManaged: 1,
+    //   name: "Rodrigo"
+    // },
     name: '',
     email: '',
     description: '',
@@ -93,6 +80,7 @@ export default {
   }),
 
   computed: {
+    ...mapState('currentUser', ['currentUser']),
     checkboxErrors() {
       const errors = []
       if (!this.$v.checkbox.$dirty) return errors
@@ -150,8 +138,10 @@ export default {
   },
 
   methods: {
-    submit() {
-      this.$v.$touch()
+    handleSubmit() {
+      // send data to store: currentUser.institution_id + everything in body
+      this.clear()
+      // maybe send some alert or something
     },
     clear() {
       this.$v.$reset()
