@@ -80,7 +80,7 @@ export default {
   }),
 
   computed: {
-    ...mapState('currentUser', ['currentUser']),
+    ...mapState(['currentUser']),
     checkboxErrors() {
       const errors = []
       if (!this.$v.checkbox.$dirty) return errors
