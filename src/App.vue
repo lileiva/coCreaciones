@@ -50,13 +50,19 @@
           mt-2
           :to="{ name: 'Offers' }"
         >
-          Offertas
+          Ofertas
         </v-list-tile>
         <v-list-tile
           mt-2
           :to="{ name: 'Institutions' }"
         >
           Organizaciones
+        </v-list-tile>
+        <v-list-tile
+          mt-2
+          :to="{ name: 'profile' }"
+        >
+          Mi perfil
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
