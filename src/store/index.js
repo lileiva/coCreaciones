@@ -32,7 +32,6 @@ export default new Vuex.Store({
     auth: firebase.auth(),
     authCreate: appForUsers.auth(),
     currentUser: null,
-    currentExecution: null,
   },
   getters: {
     usersDB: state => state.db.collection('users'),
@@ -42,12 +41,29 @@ export default new Vuex.Store({
     peopleDB: state => state.db.collection('people'),
   },
   mutations: {
-    setCurrentExecution(state, { execution }) {
-      state.currentExecution = execution
+    setUser(state, { user }) {
+      state.currentUser = user
     },
   },
   actions: {
-
+    singIn({ commit, getters, state }, { email, password }) {
+      return getters.usersDB.where('email', '==', email).limit(1).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((user) => {
+            if (user) {
+              state.auth.signInWithEmailAndPassword(email, password).then(
+                (authUser) => {
+                  const newUser = {
+                    id: authUser.uid,
+                    ...user.data(),
+                  }
+                  commit('setUser', { user: newUser })
+                },
+              )
+            }
+          })
+        })
+    },
   },
   modules: {
     users,
