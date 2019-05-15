@@ -25,9 +25,10 @@
                 vestibulum mauris pretium non. Suspendisse potenti.
               </div>
             </div>
+            <br>
             <div>
               Contacto
-            </div>
+            </div><br>
             <div>
               Cel  +56964965470 <br>
               Mail j.perez@gmail.com <br>
