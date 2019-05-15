@@ -28,5 +28,15 @@ export default new Router({
       name: 'Offers',
       component: () => import('./views/Offers.vue'),
     },
+    {
+      path: '/offers/:id',
+      name: 'OfferShow',
+      component: () => import('./views/Offer.vue'),
+    },
+    {
+      path: '/offers-create',
+      name: 'OfferForm',
+      component: () => import('./views/OfferForm.vue'),
+    },
   ],
 })

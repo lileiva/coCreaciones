@@ -2,24 +2,30 @@
   <div class="offer">
     <v-card>
       <v-card-title>
-        <div>
-          <span class="offerTitle"><a
-            href="#"
-            class="offerInstitutionLink"
-          > {{ offer.institutionName }}</a> - {{ offer.title }}</span><br>
-          <span class="grey--text">{{ offer.description }}</span><br>
-          <span class="grey--text">Horas semanales: {{ offer.hoursPerWeek }}</span><br>
-          <span class="grey--text">Contactar a {{ offer.contactEmail }}</span>
-        </div>
-      </v-card-title>
-      <v-card-actions>
-        <v-btn
-          flat
-          color="orange"
+        <a
+          class="linkDiscreto"
+          :href="'/offers/' + offer.id"
         >
-          Explore
-        </v-btn>
-      </v-card-actions>
+          <div>
+            <span class="offerTitle">
+              <a
+                href="#"
+                class="offerInstitutionLink"
+              >{{ institutions[offer.institution_id].name.toUpperCase() }}</a>
+              - {{ offer.title }}
+            </span>
+            <br>
+            <span class="grey--text">{{ offer.description }}</span>
+            <br>
+            <span class="grey--text">Horas semanales: {{ offer.hoursPerWeek }}</span>
+            <br>
+            <span class="grey--text">
+              Contactar a
+              <a :href="'mailto:' + offer.contactEmail">{{ offer.contactEmail }}</a>
+            </span>
+          </div>
+        </a>
+      </v-card-title>
     </v-card>
   </div>
 </template>
@@ -32,21 +38,26 @@ export default {
       type: Object,
       default: () => {},
     },
+    institutions: {
+      type: Object,
+      default: () => {},
+    },
   },
-  computed: {
-  },
-  created() {
-  },
-  methods: {
-  },
+  computed: {},
+  created() {},
+  methods: {},
 }
 </script>
 <style scoped>
-  .offerTitle {
-      font-size: 24px;
-  }
-  .offerInstitutionLink {
-      text-decoration: none;
-      color: black;
-  }
+.offerTitle {
+  font-size: 24px;
+}
+.offerInstitutionLink {
+  text-decoration: none;
+  color: black;
+}
+.linkDiscreto {
+  text-decoration: none;
+  color: black;
+}
 </style>
