@@ -21,6 +21,7 @@
 
             <v-card-text>
               <AdminFormCreateUser
+                :login="false"
                 @closeDialog="close"
                 @saveUser="close"
               />

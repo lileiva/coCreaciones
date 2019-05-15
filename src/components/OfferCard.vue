@@ -1,30 +1,24 @@
 <template>
   <div class="offer">
-    <v-card>
+    <v-card
+      :to=" { name: 'OfferShow', params: { id: offer.id }}"
+    >
       <v-card-title>
-        <a
-          class="linkDiscreto"
-          :href="'/offers/' + offer.id"
-        >
-          <div>
-            <span class="offerTitle">
-              <a
-                href="#"
-                class="offerInstitutionLink"
-              >{{ institutions[offer.institution_id].name.toUpperCase() }}</a>
-              - {{ offer.title }}
-            </span>
-            <br>
-            <span class="grey--text">{{ offer.description }}</span>
-            <br>
-            <span class="grey--text">Horas semanales: {{ offer.hoursPerWeek }}</span>
-            <br>
-            <span class="grey--text">
-              Contactar a
-              <a :href="'mailto:' + offer.contactEmail">{{ offer.contactEmail }}</a>
-            </span>
-          </div>
-        </a>
+        <div>
+          <span class="offerTitle">
+            {{ institutions[offer.institution_id].name.toUpperCase() }}
+            - {{ offer.title }}
+          </span>
+          <br>
+          <span class="grey--text">{{ offer.description }}</span>
+          <br>
+          <span class="grey--text">Horas semanales: {{ offer.hoursPerWeek }}</span>
+          <br>
+          <span class="grey--text">
+            Contactar a
+            <a :href="'mailto:' + offer.contactEmail">{{ offer.contactEmail }}</a>
+          </span>
+        </div>
       </v-card-title>
     </v-card>
   </div>
