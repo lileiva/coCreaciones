@@ -27,14 +27,18 @@ const actions = {
       commit('deleteUser', { user })
     })
   },
-  createUser({ commit, rootState, rootGetters }, { user }) {
-    rootState.authCreate.createUserWithEmailAndPassword(user.email, user.password).then(
+  createUser({ commit, rootState, rootGetters }, { user, login }) {
+    let ref = rootState.authCreate
+    if (login) {
+      ref = rootState.auth
+    }
+    ref.createUserWithEmailAndPassword(user.email, user.password).then(
       () => {
-        const newUser = { ...user, id: user.nick }
+        const newUser = { ...user }
         delete newUser.password
-        rootGetters.usersDB.doc(user.nick).set(newUser).then(() => {
-        }).then(() => {
-          commit('addUser', { user: newUser })
+        rootGetters.usersDB.add(newUser).then((docRef) => {
+          commit('addUser', { user: { ...newUser, id: docRef.id } })
+          commit('setUser', { user: { ...newUser, id: docRef.id } }, { root: true })
         })
       },
     )

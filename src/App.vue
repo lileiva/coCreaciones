@@ -113,16 +113,23 @@
       </v-footer>
     </v-app>
     <Login v-if="!currentUser" />
+    <AdminFormCreateUser
+      v-if="!currentUser"
+      :login="true"
+    />
   </diV>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import Login from './components/Login.vue'
+import AdminFormCreateUser from './components/AdminFormCreateUser.vue'
+
 
 export default {
   components: {
     Login,
+    AdminFormCreateUser,
   },
 
   data: () => ({

@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <h1>
+      Registrate
+    </h1>
     <v-form>
       <v-layout
         row
@@ -9,24 +12,34 @@
       >
         <v-flex xs12>
           <v-text-field
-            v-model="user.nick"
-            label="Ingresar nick"
-          />
-          <v-text-field
             v-model="user.email"
             label="Ingresar email"
           />
           <v-text-field
-            v-model="user.company"
-            label="Ingresar organización"
+            v-model="user.name"
+            label="Ingresar nombre"
           />
           <v-text-field
+            v-model="user.degree"
+            label="Ingresar grado academico"
+          />
+          <v-text-field
+            v-model="user.CV"
+            label="Ingresar cv (proyectos separados por ';')"
+          />
+          <v-checkbox
+            v-model="user.admin"
+            label="Es admin?"
+            hide-details
+          />
+          <v-text-field
+            id="password"
             v-model="user.password"
+            name="password"
             label="Contraseña"
-          />
-          <v-text-field
-            v-model="user.role"
-            label="Rol"
+            :append-icon="show1 ? 'visibility_off' : 'visibility'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
           />
         </v-flex>
         <v-flex xs12>
@@ -36,14 +49,7 @@
             flat
             @click.prevent="onSubmit"
           >
-            Subir
-          </v-btn>
-          <v-btn
-            color="blue darken-2"
-            flat
-            @click="close"
-          >
-            Cancelar
+            Registarme
           </v-btn>
         </v-flex>
       </v-layout>
@@ -52,21 +58,25 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import randomPassword from '../functions/RandomPassword'
 
 export default {
   name: 'AdminFormCreateUser',
+  props: {
+    login: Boolean,
+  },
   data() {
     return {
       valid: true,
-      passwordGenerator: randomPassword,
       user: {
-        nick: '',
+        CV: '',
         email: '',
-        company: '',
-        password: randomPassword(),
-        role: 'admin',
+        degree: '',
+        name: '',
+        password: '',
+        admin: false,
       },
+      drawer: null,
+      show1: false,
     }
   },
   methods: {
@@ -75,18 +85,15 @@ export default {
     ]),
     onSubmit(evt) {
       evt.preventDefault()
-      this.createUser({ user: { ...this.user } })
-      this.user = {
-        nick: '',
-        email: '',
-        company: '',
-        password: '',
-      }
-      this.$emit('saveUser')
-      this.user.password = this.passwordGenerator()
-    },
-    close() {
-      this.$emit('closeDialog')
+      this.user.CV = this.user.CV.split(';')
+      this.createUser({ user: { ...this.user }, login: this.login })
+      // this.user = {
+      //   CV: '',
+      //   email: '',
+      //   degree: '',
+      //   name: '',
+      //   password: '',
+      // }
     },
   },
 }
