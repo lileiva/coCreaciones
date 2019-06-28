@@ -7,6 +7,7 @@
           max-width="500px"
         >
           <v-btn
+            v-if="currentUser.admin"
             slot="activator"
             color="primary"
             dark
@@ -28,7 +29,8 @@
             </v-card-text>
           </v-card>
         </v-dialog>
-        <v-spacer /><v-spacer />
+        <v-spacer />
+        <v-spacer />
         <v-text-field
           v-model="search"
           append-icon="search"
@@ -162,15 +164,10 @@ export default {
       return UserHeaders
     },
     items() {
-      return Object.keys(this.users)
-        .map(
-          key => Object.assign({}, this.users[key]),
-        )
+      return Object.keys(this.users).map(key => Object.assign({}, this.users[key]))
     },
-    ...mapState('users', [
-      'users',
-      'currentUser',
-    ]),
+    ...mapState('users', ['users']),
+    ...mapState(['currentUser']),
   },
   watch: {
     dialog(val) {
@@ -181,14 +178,13 @@ export default {
   },
   created() {
     this.fetchUsers().then(() => {
-      setTimeout(() => { this.loading = false }, 500)
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   },
   methods: {
-    ...mapActions('users', [
-      'fetchUsers',
-      'deleteUser',
-    ]),
+    ...mapActions('users', ['fetchUsers', 'deleteUser']),
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()

@@ -1,8 +1,6 @@
 <template>
   <v-container>
-    <h1>
-      Registrate
-    </h1>
+    <h1>Registrate</h1>
     <v-form>
       <v-layout
         row
@@ -80,9 +78,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('users', [
-      'createUser',
-    ]),
+    ...mapActions('users', ['createUser']),
     onSubmit(evt) {
       evt.preventDefault()
       this.user.CV = this.user.CV.split(';')
@@ -100,5 +96,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
