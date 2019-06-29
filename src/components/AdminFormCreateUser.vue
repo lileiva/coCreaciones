@@ -20,16 +20,17 @@
             label="Ingresar nombre"
           />
           <v-text-field
-            v-model="user.age"
-            label="Ingresar edad"
-          />
-          <v-text-field
             v-model="user.degree"
             label="Ingresar grado academico"
           />
           <v-text-field
             v-model="user.CV"
             label="Ingresar cv (proyectos separados por ';')"
+          />
+          <v-checkbox
+            v-model="user.admin"
+            label="Es admin?"
+            hide-details
           />
           <v-text-field
             id="password"
@@ -72,6 +73,7 @@ export default {
         degree: '',
         name: '',
         password: '',
+        admin: false,
       },
       drawer: null,
       show1: false,
