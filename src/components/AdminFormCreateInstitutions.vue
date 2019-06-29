@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-form>
+    <v-form class="form">
       <v-layout
         row
         wrap
