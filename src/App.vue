@@ -125,7 +125,6 @@ import { mapState } from 'vuex'
 import Login from './components/Login.vue'
 import AdminFormCreateUser from './components/AdminFormCreateUser.vue'
 
-
 export default {
   components: {
     Login,

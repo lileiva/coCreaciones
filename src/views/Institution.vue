@@ -47,7 +47,7 @@
         </v-card>
       </v-flex>
 
-      <!-- <v-flex
+      <v-flex
         v-if="showMembers"
         xs9
       >
@@ -63,9 +63,9 @@
             </td>
           </template>
         </v-data-table>
-      </v-flex> -->
+      </v-flex>
 
-      <!-- <v-flex
+      <v-flex
         v-if="showReviews"
         xs9
       >
@@ -84,7 +84,7 @@
             </td>
           </template>
         </v-data-table>
-      </v-flex> -->
+      </v-flex>
 
       <v-flex
         v-if="showProjects"
@@ -122,7 +122,7 @@ export default {
   name: 'InstitutionShow',
   data() {
     return {
-    //   showMembers: true,
+      showMembers: false,
       showReviews: false,
       showProjects: true,
     }
@@ -167,21 +167,21 @@ export default {
     ]),
     toggleMembers(event) {
       if (event) {
-        // this.$data.showMembers = true
+        this.$data.showMembers = true
         this.$data.showReviews = false
         this.$data.showProjects = false
       }
     },
     toggleReviews(event) {
       if (event) {
-        // this.$data.showMembers = false
+        this.$data.showMembers = false
         this.$data.showReviews = true
         this.$data.showProjects = false
       }
     },
     toggleProjects(event) {
       if (event) {
-        // this.$data.showMembers = false
+        this.$data.showMembers = false
         this.$data.showReviews = false
         this.$data.showProjects = true
       }
