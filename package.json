@@ -18,6 +18,7 @@
     "material-design-icons-iconfont": "^3.0.3",
     "register-service-worker": "^1.5.2",
     "roboto-fontface": "*",
+    "sinon": "^7.3.2",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",

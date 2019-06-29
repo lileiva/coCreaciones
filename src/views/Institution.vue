@@ -47,68 +47,70 @@
         </v-card>
       </v-flex>
 
-      <v-flex
-        v-if="showMembers"
-        xs9
-      >
-        <v-data-table
-          :headers="userHeaders"
-          :items="userSample"
-          class="elevation-1"
+      <div class="contentTable">
+        <v-flex
+          v-if="showMembers"
+          xs9
         >
-          <template v-slot:items="user">
-            <td>{{ user.item.name }}</td>
-            <td class="text-xs-center">
-              {{ user.item.joined_at }}
-            </td>
-          </template>
-        </v-data-table>
-      </v-flex>
+          <v-data-table
+            :headers="userHeaders"
+            :items="userSample"
+            class="elevation-1"
+          >
+            <template v-slot:items="user">
+              <td>{{ user.item.name }}</td>
+              <td class="text-xs-center">
+                {{ user.item.joined_at }}
+              </td>
+            </template>
+          </v-data-table>
+        </v-flex>
 
-      <v-flex
-        v-if="showReviews"
-        xs9
-      >
-        <v-data-table
-          :headers="reviewHeaders"
-          :items="reviewSample"
-          class="elevation-1"
+        <v-flex
+          v-if="showReviews"
+          xs9
         >
-          <template v-slot:items="review">
-            <td>{{ review.item.name }}</td>
-            <td class="text-xs-center">
-              {{ review.item.description }}
-            </td>
-            <td class="text-xs-center">
-              {{ review.item.rate }}
-            </td>
-          </template>
-        </v-data-table>
-      </v-flex>
+          <v-data-table
+            :headers="reviewHeaders"
+            :items="reviewSample"
+            class="elevation-1"
+          >
+            <template v-slot:items="review">
+              <td>{{ review.item.name }}</td>
+              <td class="text-xs-center">
+                {{ review.item.description }}
+              </td>
+              <td class="text-xs-center">
+                {{ review.item.rate }}
+              </td>
+            </template>
+          </v-data-table>
+        </v-flex>
 
-      <v-flex
-        v-if="showProjects"
-        xs9
-      >
-        <v-data-table
-          :headers="offerHeaders"
-          :items="projects"
-          class="elevation-1"
+        <v-flex
+          v-if="showProjects"
+          xs9
         >
-          <template v-slot:items="project">
-            <td>{{ project.item.title }}</td>
-            <td class="text-xs-center">
-              {{ project.item.description }}
-            </td>
-            <td class="text-xs-center">
-              {{ project.item.contactEmail }}
-            </td>
-            <td class="text-xs-center">
-              {{ project.item.hoursPerWeek }}
-            </td>
-          </template>
-        </v-data-table>
-      </v-flex>
+          <v-data-table
+            :headers="offerHeaders"
+            :items="projects"
+            class="elevation-1"
+          >
+            <template v-slot:items="project">
+              <td>{{ project.item.title }}</td>
+              <td class="text-xs-center">
+                {{ project.item.description }}
+              </td>
+              <td class="text-xs-center">
+                {{ project.item.contactEmail }}
+              </td>
+              <td class="text-xs-center">
+                {{ project.item.hoursPerWeek }}
+              </td>
+            </template>
+          </v-data-table>
+        </v-flex>
+      </div>
     </v-layout>
   </div>
 </template>
