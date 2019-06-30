@@ -9,17 +9,13 @@
           <v-btn
             v-if="currentUser.admin"
             slot="activator"
-            color="primary"
+            color="#282262"
             dark
             class="mb-2"
           >
             Crear Usuario
           </v-btn>
           <v-card>
-            <v-card-title>
-              <span class="headline">Nuevo usuario</span>
-            </v-card-title>
-
             <v-card-text>
               <AdminFormCreateUser
                 :login="false"
@@ -209,6 +205,8 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 .v-icon {
   display: inline-flex !important;
 }

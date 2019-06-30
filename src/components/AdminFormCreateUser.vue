@@ -47,7 +47,7 @@
             flat
             @click.prevent="onSubmit"
           >
-            Registarme
+            <span style="color:#282262">Registarme</span>
           </v-btn>
         </v-flex>
       </v-layout>

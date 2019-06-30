@@ -9,8 +9,7 @@
           <v-btn
             v-if="currentUser.admin"
             slot="activator"
-            color="primary"
-            dark
+            color="#282262"
             class="mb-2"
           >
             Crear Organización
@@ -180,6 +179,16 @@ export default {
 
 
 <style scoped>
+a:link {
+  color: #282262;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #282262;
+  text-decoration: none;
+}
+
 .v-icon {
   display: inline-flex !important;
 }

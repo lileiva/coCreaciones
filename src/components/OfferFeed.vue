@@ -47,6 +47,7 @@ export default {
 }
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 h1 {
   text-align: center;
 }
