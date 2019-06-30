@@ -3,7 +3,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import { expect } from 'chai'
 import Vuex from 'vuex'
 
-import Offer from '../../src/views/Offer.vue'
+import Offer from '../../../src/views/Offer.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

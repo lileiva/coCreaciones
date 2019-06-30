@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="institution-form">
     <v-form>
       <v-layout
         row
@@ -51,7 +51,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'AdminFormCreateOrganization',
+  name: 'AdminFormCreateInstitution',
   data() {
     return {
       valid: true,

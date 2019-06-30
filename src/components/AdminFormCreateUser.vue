@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="user-form">
     <h1>
       Registrate
     </h1>
@@ -25,7 +25,7 @@
           />
           <v-text-field
             v-model="user.CV"
-            label="Ingresar cv (proyectos separados por ';')"
+            label="Ingresar cvs"
           />
           <v-checkbox
             v-model="user.admin"

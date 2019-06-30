@@ -2,8 +2,8 @@
 import { shallowMount } from '@vue/test-utils'
 import { expect } from 'chai'
 
-import Institutions from '../../src/views/Institutions.vue'
-import AdminTableInstitutions from '../../src/components/AdminTableInstitutions.vue'
+import Institutions from '../../../src/views/Institutions.vue'
+import AdminTableInstitutions from '../../../src/components/AdminTableInstitutions.vue'
 
 describe('Institutions', () => {
   it('renders the component, and it is a div with class "Home"', () => {

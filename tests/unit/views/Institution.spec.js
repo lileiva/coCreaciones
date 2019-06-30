@@ -3,7 +3,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import { expect } from 'chai'
 import Vuex from 'vuex'
 
-import Institution from '../../src/views/Institution.vue'
+import Institution from '../../../src/views/Institution.vue'
 
 // add the 2 lines below
 const localVue = createLocalVue()
