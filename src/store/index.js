@@ -6,6 +6,7 @@ import institutions from './modules/institutions'
 import manages from './modules/manages'
 import offers from './modules/offers'
 import people from './modules/people'
+import validations from './modules/validations'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
@@ -39,6 +40,7 @@ export default new Vuex.Store({
     managesDB: state => state.db.collection('manages'),
     offersDB: state => state.db.collection('offers'),
     peopleDB: state => state.db.collection('people'),
+    validationsDB: state => state.db.collection('validations'),
   },
   mutations: {
     setUser(state, { user }) {
@@ -47,19 +49,20 @@ export default new Vuex.Store({
   },
   actions: {
     singIn({ commit, getters, state }, { email, password }) {
-      return getters.usersDB.where('email', '==', email).limit(1).get()
+      return getters.usersDB
+        .where('email', '==', email)
+        .limit(1)
+        .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((user) => {
             if (user) {
-              state.auth.signInWithEmailAndPassword(email, password).then(
-                (authUser) => {
-                  const newUser = {
-                    id: authUser.uid,
-                    ...user.data(),
-                  }
-                  commit('setUser', { user: newUser })
-                },
-              )
+              state.auth.signInWithEmailAndPassword(email, password).then((authUser) => {
+                const newUser = {
+                  id: authUser.uid,
+                  ...user.data(),
+                }
+                commit('setUser', { user: newUser })
+              })
             }
           })
         })
@@ -71,5 +74,6 @@ export default new Vuex.Store({
     manages,
     offers,
     people,
+    validations,
   },
 })

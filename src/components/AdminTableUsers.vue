@@ -53,7 +53,12 @@
           slot-scope="props"
         >
           <td class="text-xs-center">
-            {{ props.item.name }}
+            <router-link
+              :to="{ path: 'users/' + props.item.id + '',
+                     params: { id: props.item.id }}"
+            >
+              {{ props.item.name }}
+            </router-link>
           </td>
           <td class="text-xs-center">
             {{ props.item.email }}
