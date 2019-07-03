@@ -122,7 +122,6 @@ export default {
   name: 'InstitutionShow',
   data() {
     return {
-    //   showMembers: true,
       showReviews: false,
       showProjects: true,
     }
@@ -135,10 +134,10 @@ export default {
       'offers',
     ]),
     institution() {
-      return this.institutions[+this.$route.params.id]
+      return this.institutions[this.$route.params.id] || {}
     },
     projects() {
-      return this.items.filter(offer => +offer.institution_id === +this.institution.id)
+      return this.items.filter(offer => offer.institution_id === this.institution.id)
     },
     offerHeaders() {
       return InstitutionOffertHeaders
@@ -191,14 +190,14 @@ export default {
 </script>
 
 <style scoped>
-  .show_content {
-    height: 50vh;
-  }
-  .v-btn {
-    min-width: 0;
-    width: 33%;
-  }
-  .orgCard {
-    margin-right: 3%
-  }
+.show_content {
+  height: 50vh;
+}
+.v-btn {
+  min-width: 0;
+  width: 33%;
+}
+.orgCard {
+  margin-right: 3%;
+}
 </style>

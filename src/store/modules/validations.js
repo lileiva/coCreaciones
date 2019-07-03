@@ -26,7 +26,7 @@ const actions = {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          commit('addValidation', { validation: { ...doc.data(), id: doc.id } })
+          commit('addValidation', { validation: { ...doc.data(), id: `${doc.id}` } })
         }
       })
   },

@@ -1,5 +1,12 @@
 <template>
   <form @submit.prevent="handleSubmit">
+    <v-select
+      v-model="institution_id"
+      :items="instituciones"
+      :menu-props="{ maxHeight: '400' }"
+      label="Institucion"
+      hint="Selecciona la organizacion"
+    />
     <v-text-field
       v-model="name"
       :error-messages="nameErrors"
@@ -34,17 +41,23 @@
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
     />
-    <v-btn type="submit">
+    <v-btn
+      type="submit"
+      class="cbutton"
+    >
       crear
     </v-btn>
-    <v-btn @click="clear">
+    <v-btn
+      class="cbutton"
+      @click="clear"
+    >
       borrar
     </v-btn>
   </form>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 
@@ -70,6 +83,7 @@ export default {
     //   institutionManaged: 1,
     //   name: "Rodrigo"
     // },
+    institution_id: '',
     name: '',
     email: '',
     description: '',
@@ -81,6 +95,17 @@ export default {
 
   computed: {
     ...mapState(['currentUser']),
+    ...mapState('manages', ['manages']),
+    ...mapState('institutions', ['institutions']),
+    instituciones() {
+      if (!this.manages || !this.institutions) return []
+      const manages = Object.keys(this.manages).map(
+        k => this.manages[k],
+      ).filter(m => m.user_id === this.currentUser.id)
+      return manages.map(
+        m => ({ text: this.institutions[m.institution_id].name, value: m.institution_id }),
+      )
+    },
     checkboxErrors() {
       const errors = []
       if (!this.$v.checkbox.$dirty) return errors
@@ -136,10 +161,31 @@ export default {
       return errors
     },
   },
-
+  created() {
+    this.fetchManages().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
+    this.fetchInstitutions().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
+  },
   methods: {
+    ...mapActions('manages', ['fetchManages']),
+    ...mapActions('institutions', ['fetchInstitutions', 'createOffer']),
     handleSubmit() {
-      // send data to store: currentUser.institution_id + everything in body
+      this.createOffer({
+        offer: {
+          institution_id: this.institution_id,
+          name: this.name,
+          email: this.email,
+          description: this.description,
+          hoursPerWeek: this.hoursPerWeek,
+        },
+      })
       this.clear()
       // maybe send some alert or something
     },
@@ -167,5 +213,8 @@ export default {
 .linkDiscreto {
   text-decoration: none;
   color: black;
+}
+.cbutton {
+  background-color: #282262 !important;
 }
 </style>

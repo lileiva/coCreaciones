@@ -8,43 +8,40 @@
       <br>
       <h2>El lugar para encontrar tu nueva oportunidad</h2>
       <br>
-      <br>
-      <h4 style="text-align:center;">
-        <b>¿Qué es?</b>
-      </h4>
-      <p style="text-align:center;">
-        Una plataforma donde se reúnen alumnos, profesores e insitituciones de la UC
-        para resolver problemas increíbles. ¿Quieres trabajar con algún profesor?
-        ¿Quieres ser voluntario en organizaciones como La Resistencia, Animalia, o la
-        Escuela Popular Aurora Argomedo? Este es tu lugar
-      </p>
-
-      <h4 style="text-align:center;">
-        <b>¿Cómo funciona?</b>
-      </h4>
-
-      <p style="text-align:center;">
-        Buscas la oferta que te entusiasme, revisas que cumplas los requisitos mínimos
-        (por ejemplo, que puedas trabajar la cantidad de horas semanales que se pidan),
-        y contactas a la persona encargada.
-      </p>
-
-      <h4 style="text-align:center;">
-        <b>¿Qué lo diferencia de LinkedIn o un simple foro?</b>
-      </h4>
-
-      <p style="text-align:center;margin-bottom:-100px;">
-        Nexus permite que, después de trabajar, puedas entregar tu opinión de la
-        organización, y ella puede hacer lo mismo de tí. Esta es la mejor manera de que
-        puedas validar tu esfuerzo y tus capacidades con el resto de la Universidad.
-      </p>
-
-      <br>
-
-      <v-container
-        fluid
-        fill-height
-      >
+      <b-row>
+        <b-col class="adv-item">
+          <h4 style="text-align:center;">
+            <b>¿Qué es?</b>
+          </h4>
+          <p style="text-align:center;">
+            Una plataforma donde se reúnen alumnos, profesores e insitituciones de la UC
+            para resolver problemas increíbles. ¿Quieres trabajar con algún profesor?
+            ¿Quieres ser voluntario en organizaciones como La Resistencia, Animalia, o la
+            Escuela Popular Aurora Argomedo? Este es tu lugar
+          </p>
+        </b-col>
+        <b-col class="adv-item">
+          <h4 style="text-align:center;">
+            <b>¿Cómo funciona?</b>
+          </h4>
+          <p style="text-align:center;">
+            Buscas la oferta que te entusiasme, revisas que cumplas los requisitos mínimos
+            (por ejemplo, que puedas trabajar la cantidad de horas semanales que se pidan),
+            y contactas a la persona encargada.
+          </p>
+        </b-col>
+        <b-col class="adv-item">
+          <h4 style="text-align:center;">
+            <b>¿Qué lo diferencia de LinkedIn o un simple foro?</b>
+          </h4>
+          <p style="text-align:center;margin-bottom:-100px;">
+            Nexus permite que, después de trabajar, puedas entregar tu opinión de la
+            organización, y ella puede hacer lo mismo de tí. Esta es la mejor manera de que
+            puedas validar tu esfuerzo y tus capacidades con el resto de la Universidad.
+          </p>
+        </b-col>
+      </b-row>
+      <v-container>
         <v-layout
           align-center
           justify-center
@@ -55,7 +52,7 @@
                 dark
                 color="#282262"
               >
-                <v-toolbar-title>Ingreso</v-toolbar-title>
+                <v-toolbar-title>Ingresa con tu cuenta aqui!</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
@@ -151,7 +148,12 @@ h4 b {
   width: 100%;
   margin-top: 15px;
 }
-
+.adv-item{
+  border-radius: 1vw;
+  margin: 1vw;
+  padding: 1vw;
+  background-color:#92DCE5;
+}
 .v-btn__content {
   color: #efefef !important;
 }

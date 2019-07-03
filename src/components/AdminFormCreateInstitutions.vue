@@ -20,14 +20,21 @@
             v-model="organization.logo"
             label="Logo"
           />
-          <v-text-field
+          <v-select
             v-model="organization.members"
+            :items="usuarios"
+            :menu-props="{ maxHeight: '400' }"
             label="Miembros"
+            multiple
+            hint="Selecciona los miembros de la organizacion"
+            persistent-hint
           />
         </v-flex>
         <v-flex xs12>
           <v-btn
-            color="blue darken-2"
+            class="cbutton"
+            color="#282262"
+            dark
             :disabled="!valid"
             flat
             @click.prevent="onSubmit"
@@ -35,7 +42,9 @@
             Subir
           </v-btn>
           <v-btn
-            color="blue darken-2"
+            class="cbutton"
+            color="#282262"
+            dark
             flat
             @click="close"
           >
@@ -48,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'AdminFormCreateOrganization',
@@ -59,13 +68,32 @@ export default {
         name: '',
         description: '',
         logo: '',
-        members: '',
+        members: [],
       },
       drawer: null,
       show1: false,
     }
   },
+  computed: {
+    usuarios() {
+      if (!this.users) return []
+
+      return Object.keys(this.users).map((key) => {
+        const u = this.users[key]
+        return { value: u.id, text: u.name }
+      })
+    },
+    ...mapState('users', ['users']),
+  },
+  created() {
+    this.fetchUsers().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
+  },
   methods: {
+    ...mapActions('users', ['fetchUsers']),
     ...mapActions('institutions', ['createInstitution']),
     onSubmit(evt) {
       evt.preventDefault()
@@ -74,6 +102,7 @@ export default {
         name: '',
         description: '',
         logo: '',
+        members: '',
       }
       this.$emit('saveOrganization')
     },
@@ -85,4 +114,7 @@ export default {
 </script>
 
 <style scoped>
+.cbutton {
+  background-color: #282262 !important;
+}
 </style>

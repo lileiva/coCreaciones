@@ -58,8 +58,10 @@
         >
           <td class="text-xs-center">
             <router-link
-              :to="{ path: 'institutions/'+props.item.id+'',
-                     params: { id: props.item.id }}"
+              :to="{
+                path: 'institutions/'+props.item.id+'',
+                params: { id: props.item.id }
+              }"
             >
               {{ props.item.name }}
             </router-link>
@@ -73,17 +75,6 @@
           <td class="text-xs-center">
             {{ props.item.members }}
           </td>
-          <!-- <td
-            slot="activator"
-            class="justify-center layout px-0"
-          >
-            <v-icon
-              small
-              @click="del(props.item)"
-            >
-              delete
-            </v-icon>
-          </td>-->
         </template>
         <v-alert
           slot="no-results"
@@ -136,10 +127,17 @@ export default {
       return InstitutionsHeaders
     },
     items() {
-      return Object.keys(this.institutions).map(key => Object.assign({}, this.institutions[key]))
+      return Object.keys(this.institutions).map((key) => {
+        let { members } = this.institutions[key]
+        if (!members) return Object.assign({}, this.institutions[key])
+        if (typeof members === 'string') return Object.assign({}, this.institutions[key])
+        members = members.reduce((a, m) => `${a},${this.users[m].name}`, '')
+        return { ...this.institutions[key], members }
+      })
     },
     ...mapState('institutions', ['institutions']),
     ...mapState(['currentUser']),
+    ...mapState('users', ['users']),
   },
 
   watch: {
@@ -155,9 +153,15 @@ export default {
         this.loading = false
       }, 500)
     })
+    this.fetchUsers().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
   },
   methods: {
     ...mapActions('institutions', ['fetchInstitutions']),
+    ...mapActions('users', ['fetchUsers']),
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()

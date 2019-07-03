@@ -16,6 +16,11 @@ const actions = {
         })
       })
   },
+  async createOffer({ rootGetters, commit }, { offer }) {
+    return rootGetters.offersDB.add(offer).then((doc) => {
+      commit('addOffer', { offer: { ...offer, id: doc.id } })
+    })
+  },
   async fetchOffer({ state, commit, rootGetters }, { id }) {
     if (state.offers[id]) {
       return state.offers[id]
@@ -24,7 +29,7 @@ const actions = {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          commit('addOffer', { offer: { ...doc.data(), id: doc.id } })
+          commit('addOffer', { offer: { ...doc.data(), id: `${doc.id}` } })
         }
       })
   },

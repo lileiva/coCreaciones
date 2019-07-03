@@ -1,5 +1,5 @@
 const localState = {
-  manages: [],
+  manages: {},
 }
 const mutations = {
   addManage(state, { manage }) {
@@ -8,7 +8,7 @@ const mutations = {
 }
 const actions = {
   async fetchManages({ dispatch, rootGetters }) {
-    return rootGetters.instituionsDB
+    return rootGetters.managesDB
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -17,14 +17,14 @@ const actions = {
       })
   },
   async fetchManage({ state, commit, rootGetters }, { id }) {
-    if (state.instituions[id]) {
-      return state.instituions[id]
+    if (state.manages[id]) {
+      return state.manages[id]
     }
-    return rootGetters.instituionsDB.doc(id)
+    return rootGetters.managesDB.doc(id)
       .get()
       .then((doc) => {
         if (doc.exists) {
-          commit('addManage', { manage: { ...doc.data(), id: doc.id } })
+          commit('addManage', { manage: { ...doc.data(), id: `${doc.id}` } })
         }
       })
   },
