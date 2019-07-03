@@ -34,7 +34,7 @@
         </v-card>
       </v-flex>
       <div>
-        Soy juanito Perez y me encanta el latin
+        Soy Esteban Pedrero y me encanta el latin
 
         Ut in dolor sed sem porttitor porttitor. Duis consequat vel sapien ac placerat.
         Cras gravida felis purus. Praesent cursus orci non ex ultrices pretium.
@@ -46,7 +46,7 @@
         vestibulum mauris pretium non. Suspendisse potenti.
       </div>
     </v-layout>
-    name
+    Nombre
     Contacto
     Keywords
     Quien es
