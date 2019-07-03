@@ -33,21 +33,6 @@
     <h3>Otras ofertas de {{ institution.name }}</h3>
     <br>
 
-    <!-- <div>
-      <div class="columns">
-        <div class="column">
-          <OfferCard
-            v-for="offer in filteredOffers"
-            :key="offer.title"
-            :offer="offer"
-            :institutions="institutions"
-          />
-        </div>
-      </div>
-    </div>-->
-
-    <!-- <OfferFeed msg="Welcome to Your Vue.js App"/> -->
-
     <div class="column">
       <OfferCard
         v-for="_offer in filteredInstitutions"

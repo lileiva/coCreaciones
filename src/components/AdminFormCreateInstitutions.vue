@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-form>
+    <v-form class="form">
       <v-layout
         row
         wrap
@@ -59,16 +59,17 @@ export default {
         name: '',
         description: '',
         logo: '',
+        members: '',
       },
+      drawer: null,
+      show1: false,
     }
   },
   methods: {
-    ...mapActions('organizations', [
-      'createOrganization',
-    ]),
+    ...mapActions('institutions', ['createInstitution']),
     onSubmit(evt) {
       evt.preventDefault()
-      this.createOrganization({ organization: { ...this.organization } })
+      this.createInstitution({ institution: this.organization })
       this.organization = {
         name: '',
         description: '',
@@ -84,5 +85,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

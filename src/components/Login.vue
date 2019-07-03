@@ -1,6 +1,46 @@
 <template>
   <v-app id="inspire">
     <v-content>
+      <h1 class="logo">
+        &#6016;
+        <span class="logoName">Nexus</span>
+      </h1>
+      <br>
+      <h2>El lugar para encontrar tu nueva oportunidad</h2>
+      <br>
+      <br>
+      <h4 style="text-align:center;">
+        <b>¿Qué es?</b>
+      </h4>
+      <p style="text-align:center;">
+        Una plataforma donde se reúnen alumnos, profesores e insitituciones de la UC
+        para resolver problemas increíbles. ¿Quieres trabajar con algún profesor?
+        ¿Quieres ser voluntario en organizaciones como La Resistencia, Animalia, o la
+        Escuela Popular Aurora Argomedo? Este es tu lugar
+      </p>
+
+      <h4 style="text-align:center;">
+        <b>¿Cómo funciona?</b>
+      </h4>
+
+      <p style="text-align:center;">
+        Buscas la oferta que te entusiasme, revisas que cumplas los requisitos mínimos
+        (por ejemplo, que puedas trabajar la cantidad de horas semanales que se pidan),
+        y contactas a la persona encargada.
+      </p>
+
+      <h4 style="text-align:center;">
+        <b>¿Qué lo diferencia de LinkedIn o un simple foro?</b>
+      </h4>
+
+      <p style="text-align:center;margin-bottom:-100px;">
+        Nexus permite que, después de trabajar, puedas entregar tu opinión de la
+        organización, y ella puede hacer lo mismo de tí. Esta es la mejor manera de que
+        puedas validar tu esfuerzo y tus capacidades con el resto de la Universidad.
+      </p>
+
+      <br>
+
       <v-container
         fluid
         fill-height
@@ -9,15 +49,11 @@
           align-center
           justify-center
         >
-          <v-flex
-            xs12
-            sm8
-            md4
-          >
+          <v-flex md8>
             <v-card class="elevation-12">
               <v-toolbar
                 dark
-                color="primary"
+                color="#282262"
               >
                 <v-toolbar-title>Ingreso</v-toolbar-title>
                 <v-spacer />
@@ -46,7 +82,7 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  color="primary"
+                  color="#282262"
                   @click="click"
                 >
                   Ingresar
@@ -57,6 +93,16 @@
         </v-layout>
       </v-container>
     </v-content>
+    <v-footer
+      color="#282262"
+      class="white--text"
+      app
+    >
+      <span class="centered">
+        CoCreaciones - NA, JMC, LL, SV
+        &copy; 2019
+      </span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -81,3 +127,55 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+.v-content {
+  background-color: #efefef;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h4 b {
+  font-size: 22px;
+  color: #282262;
+}
+
+.centered {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #efefef;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.v-btn__content {
+  color: #efefef !important;
+}
+
+body,
+.v-content__wrap {
+  background-color: #efefef;
+  padding: 10px;
+}
+
+.logo {
+  margin-top: 25px;
+  font-size: 128px;
+  color: #282262;
+}
+
+.logoName {
+  font-size: 88px;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  color: #282262;
+}
+</style>

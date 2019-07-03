@@ -19,6 +19,11 @@ export default new Router({
       component: () => import('./views/Institutions.vue'),
     },
     {
+      path: '/users/:id',
+      name: 'UserShow',
+      component: () => import('./views/UserShow.vue'),
+    },
+    {
       path: '/institutions/:id',
       name: 'institutionShow',
       component: () => import('./views/Institution.vue'),

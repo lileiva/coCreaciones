@@ -2,7 +2,35 @@
   <div>
     <v-card>
       <v-card-title>
-        <v-spacer /><v-spacer />
+        <v-dialog
+          v-model="dialog"
+          max-width="500px"
+        >
+          <v-btn
+            v-if="currentUser.admin"
+            slot="activator"
+            color="#282262"
+            class="mb-2"
+          >
+            Crear Organización
+          </v-btn>
+
+          <v-card>
+            <v-card-title>
+              <span class="headline">Nueva organización</span>
+            </v-card-title>
+
+            <v-card-text>
+              <AdminFormCreateOrganization
+                :login="false"
+                @closeDialog="close"
+                @saveUser="close"
+              />
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+        <v-spacer />
+        <v-spacer />
         <v-text-field
           v-model="search"
           append-icon="search"
@@ -55,7 +83,7 @@
             >
               delete
             </v-icon>
-          </td> -->
+          </td>-->
         </template>
         <v-alert
           slot="no-results"
@@ -73,9 +101,13 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { InstitutionsHeaders } from '../data'
+import AdminFormCreateOrganization from './AdminFormCreateInstitutions.vue'
 
 export default {
   name: 'AdminTableInstitutions',
+  components: {
+    AdminFormCreateOrganization,
+  },
   data() {
     return {
       selected: [],
@@ -84,6 +116,19 @@ export default {
       dialog: false,
       editedIndex: -1,
       dialog2: false,
+      itemToDelete: null,
+      editedItem: {
+        name: '',
+        description: '',
+        logo: '',
+        members: '',
+      },
+      defaultItem: {
+        name: '',
+        description: '',
+        logo: '',
+        members: '',
+      },
     }
   },
   computed: {
@@ -91,27 +136,35 @@ export default {
       return InstitutionsHeaders
     },
     items() {
-      return Object.keys(this.institutions)
-        .map(
-          key => Object.assign({}, this.institutions[key]),
-        )
+      return Object.keys(this.institutions).map(key => Object.assign({}, this.institutions[key]))
     },
-    ...mapState('institutions', [
-      'institutions',
-    ]),
+    ...mapState('institutions', ['institutions']),
+    ...mapState(['currentUser']),
+  },
+
+  watch: {
+    dialog(val) {
+      if (!val) {
+        this.close()
+      }
+    },
   },
   created() {
     this.fetchInstitutions().then(() => {
-      setTimeout(() => { this.loading = false }, 500)
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   },
   methods: {
-    ...mapActions('institutions', [
-      'fetchInstitutions',
-    ]),
+    ...mapActions('institutions', ['fetchInstitutions']),
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()
+    },
+    del(organization) {
+      this.itemToDelete = organization
+      this.dialog2 = true
     },
     close() {
       this.dialog = false
@@ -126,6 +179,16 @@ export default {
 
 
 <style scoped>
+a:link {
+  color: #282262;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #282262;
+  text-decoration: none;
+}
+
 .v-icon {
   display: inline-flex !important;
 }

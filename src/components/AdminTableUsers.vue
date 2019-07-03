@@ -7,18 +7,15 @@
           max-width="500px"
         >
           <v-btn
+            v-if="currentUser.admin"
             slot="activator"
-            color="primary"
+            color="#282262"
             dark
             class="mb-2"
           >
             Crear Usuario
           </v-btn>
           <v-card>
-            <v-card-title>
-              <span class="headline">Nuevo usuario</span>
-            </v-card-title>
-
             <v-card-text>
               <AdminFormCreateUser
                 :login="false"
@@ -28,7 +25,8 @@
             </v-card-text>
           </v-card>
         </v-dialog>
-        <v-spacer /><v-spacer />
+        <v-spacer />
+        <v-spacer />
         <v-text-field
           v-model="search"
           append-icon="search"
@@ -55,7 +53,12 @@
           slot-scope="props"
         >
           <td class="text-xs-center">
-            {{ props.item.name }}
+            <router-link
+              :to="{ path: 'users/' + props.item.id + '',
+                     params: { id: props.item.id }}"
+            >
+              {{ props.item.name }}
+            </router-link>
           </td>
           <td class="text-xs-center">
             {{ props.item.email }}
@@ -162,15 +165,10 @@ export default {
       return UserHeaders
     },
     items() {
-      return Object.keys(this.users)
-        .map(
-          key => Object.assign({}, this.users[key]),
-        )
+      return Object.keys(this.users).map(key => Object.assign({}, this.users[key]))
     },
-    ...mapState('users', [
-      'users',
-      'currentUser',
-    ]),
+    ...mapState('users', ['users']),
+    ...mapState(['currentUser']),
   },
   watch: {
     dialog(val) {
@@ -181,14 +179,13 @@ export default {
   },
   created() {
     this.fetchUsers().then(() => {
-      setTimeout(() => { this.loading = false }, 500)
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   },
   methods: {
-    ...mapActions('users', [
-      'fetchUsers',
-      'deleteUser',
-    ]),
+    ...mapActions('users', ['fetchUsers', 'deleteUser']),
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()
@@ -213,6 +210,8 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 .v-icon {
   display: inline-flex !important;
 }
