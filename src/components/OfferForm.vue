@@ -97,14 +97,16 @@ export default {
     ...mapState(['currentUser']),
     ...mapState('manages', ['manages']),
     ...mapState('institutions', ['institutions']),
+    ...mapState('offers', ['offers']),
     instituciones() {
       if (!this.manages || !this.institutions) return []
-      const manages = Object.keys(this.manages).map(
-        k => this.manages[k],
-      ).filter(m => m.user_id === this.currentUser.id)
-      return manages.map(
-        m => ({ text: this.institutions[m.institution_id].name, value: m.institution_id }),
-      )
+      const manages = Object.keys(this.manages)
+        .map(k => this.manages[k])
+        .filter(m => m.user_id === this.currentUser.id)
+      return manages.map(m => ({
+        text: this.institutions[m.institution_id].name,
+        value: m.institution_id,
+      }))
     },
     checkboxErrors() {
       const errors = []
@@ -175,7 +177,8 @@ export default {
   },
   methods: {
     ...mapActions('manages', ['fetchManages']),
-    ...mapActions('institutions', ['fetchInstitutions', 'createOffer']),
+    ...mapActions('institutions', ['fetchInstitutions']),
+    ...mapActions('offers', ['createOffer']),
     handleSubmit() {
       this.createOffer({
         offer: {
