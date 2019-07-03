@@ -58,8 +58,9 @@ export default new Vuex.Store({
             if (user) {
               state.auth.signInWithEmailAndPassword(email, password).then((authUser) => {
                 const newUser = {
-                  id: authUser.uid,
+                  id: user.id,
                   ...user.data(),
+                  x: authUser,
                 }
                 commit('setUser', { user: newUser })
               })

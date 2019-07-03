@@ -1,12 +1,11 @@
 <template>
   <div class="offer">
-    <v-card
-      :to=" { name: 'OfferShow', params: { id: offer.id }}"
-    >
+    <v-card :to=" { name: 'OfferShow', params: { id: offer.id }}">
       <v-card-title>
         <div>
           <span class="offerTitle">
-            {{ institutions[offer.institution_id].name.toUpperCase() }}
+            {{ institutions[offer.institution_id] ?
+              institutions[offer.institution_id].name.toUpperCase() : '' }}
             - {{ offer.title }}
           </span>
           <br>
@@ -25,21 +24,31 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'OfferCard',
   props: {
     offer: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
-    institutions: {
-      type: Object,
-      default: () => {},
-    },
+
   },
-  computed: {},
-  created() {},
-  methods: {},
+  computed: {
+    ...mapState('institutions', ['institutions']),
+  },
+  created() {
+    this.fetchInstitutions().then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
+    })
+  },
+  methods: {
+    ...mapActions('institutions', ['fetchInstitutions']),
+
+  },
 }
 </script>
 <style scoped>

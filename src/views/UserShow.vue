@@ -4,11 +4,20 @@
       <div class="no-top">
         <h1>{{ user.name }}</h1>
         <h3>Grado académico: {{ user.degree }}</h3>
-        <h3 v-if="user.admin">Es un administrador</h3>
-        <h3 v-if="!user.admin">No es un administrador</h3>
+        <h3 v-if="user.admin">
+          Es un administrador
+        </h3>
+        <h3 v-if="!user.admin">
+          No es un administrador
+        </h3>
         <h3>CV:</h3>
         <ul>
-          <li v-for="item in user.CV">{{ item }}</li>
+          <li
+            v-for="(item, index ) in user.CV"
+            :key="index"
+          >
+            {{ item }}
+          </li>
         </ul>
         <br>
         <br>
@@ -28,54 +37,54 @@
 
 
 <script>
-import { mapState, mapActions } from "vuex";
-import Review from "../components/Review";
+import { mapState, mapActions } from 'vuex'
+import Review from '../components/Review.vue'
 
 export default {
-  name: "UserShow",
+  name: 'UserShow',
   components: {
-    Review
+    Review,
   },
   data() {
     return {
-      loading: false
-    };
+      loading: false,
+    }
   },
   computed: {
-    ...mapState("validations", ["validations"]),
-    ...mapState("users", ["users"]),
+    ...mapState('validations', ['validations']),
+    ...mapState('users', ['users']),
     user() {
-      const observer = this.users.__ob__;
-      return observer.value[this.$route.params.id];
+      const observer = this.users.ob
+      return observer.value[this.$route.params.id]
     },
 
     filteredValidations() {
-      const l = [];
-      Object.entries(this.validations).forEach(([id, validation]) => {
-        if (validation.person_id === +this.$route.params.id) {
-          l.push(validation);
+      const l = []
+      Object.entries(this.validations).forEach(([validation]) => {
+        if (validation[1].person_id === +this.$route.params.id) {
+          l.push(validation[1])
         }
-      });
-      return l;
-    }
+      })
+      return l
+    },
   },
   created() {
     this.fetchValidations().then(() => {
       setTimeout(() => {
-        this.loading = false;
-      }, 500);
-    });
+        this.loading = false
+      }, 500)
+    })
     this.fetchUsers().then(async () => {
       setTimeout(async () => {
-        this.loading = false;
-      }, 500);
-    });
+        this.loading = false
+      }, 500)
+    })
   },
   methods: {
-    ...mapActions("validations", ["fetchValidations"]),
-    ...mapActions("users", ["fetchUsers"])
-  }
-};
+    ...mapActions('validations', ['fetchValidations']),
+    ...mapActions('users', ['fetchUsers']),
+  },
+}
 </script>
 
 <style scoped>

@@ -28,7 +28,7 @@ const actions = {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          commit('addInstitution', { institution: { ...doc.data(), id: doc.id } })
+          commit('addInstitution', { institution: { ...doc.data(), id: `${doc.id}` } })
         }
       })
   },
