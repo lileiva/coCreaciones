@@ -60,4 +60,12 @@ describe('AdminTableInstitutions', () => {
   it('displays an empty warning', () => {
     expect(wrapper.find('.empty-warning').exists()).to.equal(true)
   })
+
+  it('has institutions in state', () => {
+    expect(wrapper.vm.institutions[1].description).to.equal('desc1')
+    expect(wrapper.vm.institutions[1].id).to.equal('1')
+    expect(wrapper.vm.institutions[1].name).to.equal('asd')
+    expect(wrapper.vm.institutions[1].profile_pic).to.equal('')
+    expect(wrapper.vm.institutions[1].size).to.equal(1)
+  })
 })

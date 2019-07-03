@@ -52,4 +52,12 @@ describe('AdminFormCreateUser', () => {
     expect(cvInput.text()).to.equal('')
     expect(adminInput.text()).to.equal('')
   })
+
+  it('Triggers an event when submitted', () => {
+    const wrapper = shallowMount(AdminFormCreateUser, { localVue, store, mocks: { $route } })
+    const btn = wrapper.find('.sbm-btn')
+    expect(btn.exists()).to.equal(true)
+    btn.vm.$emit('click', '$event')
+    expect(btn.emitted().click.length).to.equal(1)
+  })
 })

@@ -15,6 +15,11 @@ const actions = {
 const store = new Vuex.Store({
   state: {
     currentUser: { admin: true },
+    institution: {
+      name: '',
+      description: '',
+      logo: '',
+    },
   },
   modules: {
     institutions: {
@@ -55,24 +60,9 @@ describe('AdminFormCreateInstitution', () => {
   })
 
   it('Triggers an event when submitted', () => {
-    wrapper.setData({
-      valid: true,
-      organization: {
-        name: 'asd',
-        description: 'asd',
-        logo: 'asd.png',
-      },
-    })
-
-    wrapper.setMethods({
-      onSubmit: (evt) => {
-        evt.preventDefault()
-        wrapper.vm.$emit('emitted')
-      },
-    })
-
-    expect(wrapper.find('.sbm-btn').exists()).to.equal(true)
-    wrapper.find('.sbm-btn').vm.$emit('click(evt)')
-    expect(wrapper.emitted().click.length).to.equal(1)
+    const btn = wrapper.find('.sbm-btn')
+    expect(btn.exists()).to.equal(true)
+    btn.vm.$emit('click', '$event')
+    expect(btn.emitted().click.length).to.equal(1)
   })
 })

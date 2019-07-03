@@ -44,6 +44,7 @@
         </v-flex>
         <v-flex xs12>
           <v-btn
+            class="sbm-btn"
             color="blue darken-2"
             :disabled="!valid"
             flat

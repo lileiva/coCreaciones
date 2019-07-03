@@ -38,4 +38,11 @@ describe('OfferForm', () => {
   it('renders the component, and it is a form with class "offer-form"', () => {
     expect(wrapper.is('.offer-form')).to.equal(true)
   })
+
+  it('Triggers an event when submitted', () => {
+    const btn = wrapper.find('.sbm-btn')
+    expect(btn.exists()).to.equal(true)
+    btn.vm.$emit('click', '$event')
+    expect(btn.emitted().click.length).to.equal(1)
+  })
 })

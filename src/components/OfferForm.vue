@@ -37,7 +37,10 @@
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
     />
-    <v-btn type="submit">
+    <v-btn
+      type="submit"
+      class="sbm-btn"
+    >
       crear
     </v-btn>
     <v-btn @click="clear">

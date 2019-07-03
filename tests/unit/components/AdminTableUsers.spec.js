@@ -25,7 +25,13 @@ const store = new Vuex.Store({
       namespaced: true,
       actions,
       state: {
-        users: {},
+        users: {
+          1: {
+            id: 1,
+            name: 'seba',
+            admin: true,
+          },
+        },
         currentUser: { admin: true, noConfirm: false },
       },
     },
@@ -45,5 +51,11 @@ describe('AdminTableUsers', () => {
 
   it('displays an empty warning', () => {
     expect(wrapper.find('.empty-warning').exists()).to.equal(true)
+  })
+
+  it('has users in state', () => {
+    expect(wrapper.vm.users[1].admin).to.equal(true)
+    expect(wrapper.vm.users[1].id).to.equal(1)
+    expect(wrapper.vm.users[1].name).to.equal('seba')
   })
 })
