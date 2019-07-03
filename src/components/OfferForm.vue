@@ -9,7 +9,6 @@
     />
     <v-text-field
       v-model="name"
-      :error-messages="nameErrors"
       :counter="60"
       label="Título"
       required
@@ -65,7 +64,7 @@ export default {
   mixins: [validationMixin],
 
   validations: {
-    name: { required, maxLength: maxLength(60) },
+    name: { maxLength: maxLength(60) },
     email: { required, email },
     description: { required },
     hoursPerWeek: { required },
@@ -183,10 +182,12 @@ export default {
       this.createOffer({
         offer: {
           institution_id: this.institution_id,
-          name: this.name,
-          email: this.email,
+          title: this.name,
+          contactEmail: this.email,
           description: this.description,
           hoursPerWeek: this.hoursPerWeek,
+          valid: true,
+          posted: Date.now(),
         },
       })
       this.clear()

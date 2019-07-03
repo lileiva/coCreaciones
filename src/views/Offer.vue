@@ -23,10 +23,8 @@
           <a :href="'mailto:' + offer.contactEmail">{{ offer.contactEmail }}</a>
         </div>
         <br>
-        <div
-          class="posted-info"
-        >
-          Oferta subida el {{ new Date(new Date(1970, 0, 1).setSeconds(offer.posted.seconds)) }}
+        <div class="posted-info">
+          Oferta subida el {{ new Date(new Date(1970, 0, 1).setSeconds(offer.posted)) }}
         </div>
       </div>
     </div>
@@ -61,22 +59,17 @@ export default {
     ...mapState('institutions', ['institutions']),
     ...mapState('offers', ['offers']),
     offer() {
-      return this.offers[+this.$route.params.id]
+      return this.offers[this.$route.params.id]
     },
     institution() {
-      return this.institutions[+this.offer.institution_id]
+      return this.institutions[this.offer.institution_id] || {}
     },
     filteredInstitutions() {
-      const l = []
-      Object.entries(this.offers).forEach(([id, offer]) => {
-        if (
-          offer.institution_id === +this.institution.id
-          && id !== this.offer.id
-        ) {
-          l.push(offer)
-        }
-      })
-      return l
+      return Object.keys(this.offers).map(
+        key => Object.assign({}, this.offers[key]),
+      ).filter(
+        o => o.id !== this.$route.params.id && o.institution_id === this.offer.institution_id,
+      )
     },
   },
   created() {
