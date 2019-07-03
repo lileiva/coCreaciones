@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="offer-feed">
     <div class="columns">
       <div class="column">
         <OfferCard

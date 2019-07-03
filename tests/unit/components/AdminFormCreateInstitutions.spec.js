@@ -13,6 +13,9 @@ const actions = {
 }
 
 const store = new Vuex.Store({
+  state: {
+    currentUser: { admin: true },
+  },
   modules: {
     institutions: {
       namespaced: true,
@@ -34,13 +37,13 @@ const store = new Vuex.Store({
 const $route = {}
 
 describe('AdminFormCreateInstitution', () => {
+  const wrapper = shallowMount(AdminFormCreateInstitution, { localVue, store, mocks: { $route } })
   it('renders the component, and it is a div with class "institution-form"', () => {
-    const wrapper = shallowMount(AdminFormCreateInstitution, { localVue, store, mocks: { $route } })
     expect(wrapper.is('.institution-form')).to.equal(true)
+    expect(wrapper.find('.create-form').exists()).to.equal(true)
   })
 
   it('constains all form inputs: "Nombre", "Descripcion", "Logo", "Miembros"', () => {
-    const wrapper = shallowMount(AdminFormCreateInstitution, { localVue, store, mocks: { $route } })
     const nombreInput = wrapper.find('[label="Nombre"]')
     const descripcionInput = wrapper.find('[label="Descripción"]')
     const logoInput = wrapper.find('[label="Logo"]')
@@ -49,5 +52,27 @@ describe('AdminFormCreateInstitution', () => {
     expect(descripcionInput.text()).to.equal('')
     expect(logoInput.text()).to.equal('')
     expect(miembrosInput.text()).to.equal('')
+  })
+
+  it('Triggers an event when submitted', () => {
+    wrapper.setData({
+      valid: true,
+      organization: {
+        name: 'asd',
+        description: 'asd',
+        logo: 'asd.png',
+      },
+    })
+
+    wrapper.setMethods({
+      onSubmit: (evt) => {
+        evt.preventDefault()
+        wrapper.vm.$emit('emitted')
+      },
+    })
+
+    expect(wrapper.find('.sbm-btn').exists()).to.equal(true)
+    wrapper.find('.sbm-btn').vm.$emit('click(evt)')
+    expect(wrapper.emitted().click.length).to.equal(1)
   })
 })

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="user-index">
     <v-card>
       <v-card-title>
         <v-dialog
@@ -40,7 +40,7 @@
       <v-data-table
         :headers="headers"
         :items="items"
-        class="elevation-1 text-xs-center"
+        class="elevation-1 text-xs-center user-table"
         :loading="loading"
         item-key="id"
         :search="search"
@@ -83,6 +83,7 @@
           :value="true"
           color="error"
           icon="warning"
+          class="empty-warning"
         >
           Su busqueda "{{ search }}" No tiene resultados.
         </v-alert>

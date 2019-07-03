@@ -1,6 +1,6 @@
 <template>
   <v-container class="institution-form">
-    <v-form>
+    <v-form class="create-form">
       <v-layout
         row
         wrap
@@ -27,6 +27,7 @@
         </v-flex>
         <v-flex xs12>
           <v-btn
+            class="sbm-btn"
             color="blue darken-2"
             :disabled="!valid"
             flat

@@ -1,6 +1,6 @@
 <template>
   <div class="institution-index">
-    {{ institutions }}
+    {{ items }}
     <v-card>
       <v-card-title>
         <v-spacer /><v-spacer />
@@ -63,6 +63,7 @@
           :value="true"
           color="error"
           icon="warning"
+          class="empty-warning"
         >
           Su busqueda "{{ search }}" No tiene resultados.
         </v-alert>

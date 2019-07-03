@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form
+    class="offer-form"
+    @submit.prevent="handleSubmit"
+  >
     <v-text-field
       v-model="name"
       :error-messages="nameErrors"

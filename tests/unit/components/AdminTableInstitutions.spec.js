@@ -1,6 +1,6 @@
 
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import { expect, done } from 'chai'
+import { expect } from 'chai'
 import Vuex from 'vuex'
 
 import AdminTableInstitutions from '../../../src/components/AdminTableInstitutions.vue'
@@ -10,32 +10,28 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 const actions = {
+  createInstitution() { return null },
   async fetchInstitutions() {
-    return Promise.resolve({
-      0: {
-        id: '0',
-        name: 'dummyname',
-        description: 'dummydesc',
-        logo: 'dummylogo',
-        members: 'dummymembers',
-      },
-    })
+    return Promise.resolve(null)
   },
 }
 
 const store = new Vuex.Store({
+  state: {
+    currentUser: { admin: true },
+  },
   modules: {
     institutions: {
       namespaced: true,
       actions,
       state: {
         institutions: {
-          0: {
-            id: '0',
-            name: 'dummyname',
-            description: 'dummydesc',
-            logo: 'dummylogo',
-            members: 'dummymembers',
+          1: {
+            description: 'desc1',
+            id: '1',
+            name: 'asd',
+            profile_pic: '',
+            size: 1,
           },
         },
       },
@@ -61,16 +57,7 @@ describe('AdminTableInstitutions', () => {
     expect(wrapper.find('.institution-table').exists()).to.equal(true)
   })
 
-  it('displays the following content: "Nombre", "Descripcion", "Logo", "Miembros"', () => {
-    console.log(wrapper.items)
-    const nombreInst = wrapper.find('.institution-name')
-    const descripcionInst = wrapper.find('.institution-description')
-    const logoInst = wrapper.find('.institution-logo')
-    const miembrosInst = wrapper.find('.institution-members')
-    expect(nombreInst.exists()).to.equal(true)
-    expect(descripcionInst.exists()).to.equal(true)
-    expect(logoInst.exists()).to.equal(true)
-    expect(miembrosInst.exists()).to.equal(true)
-    done()
+  it('displays an empty warning', () => {
+    expect(wrapper.find('.empty-warning').exists()).to.equal(true)
   })
 })
