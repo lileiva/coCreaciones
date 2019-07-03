@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       namespaced: true,
       actions,
       state: {
-        institutions: [{ logo: null }],
+        institutions: { 0: { logo: null } },
       },
     },
     offers: {

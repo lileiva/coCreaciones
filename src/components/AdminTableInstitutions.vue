@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="institution-index">
+    {{ institutions }}
     <v-card>
       <v-card-title>
         <v-spacer /><v-spacer />
@@ -14,7 +15,7 @@
       <v-data-table
         :headers="headers"
         :items="items"
-        class="elevation-1 text-xs-center"
+        class="elevation-1 text-xs-center institution-table"
         :loading="loading"
         item-key="id"
         :search="search"
@@ -28,7 +29,7 @@
           slot="items"
           slot-scope="props"
         >
-          <td class="text-xs-center">
+          <td class="text-xs-center institution-name">
             <router-link
               :to="{ path: 'institutions/'+props.item.id+'',
                      params: { id: props.item.id }}"
@@ -36,13 +37,13 @@
               {{ props.item.name }}
             </router-link>
           </td>
-          <td class="text-xs-center">
+          <td class="text-xs-center institution-description">
             {{ props.item.description }}
           </td>
-          <td class="text-xs-center">
+          <td class="text-xs-center institution-logo">
             {{ props.item.logo }}
           </td>
-          <td class="text-xs-center">
+          <td class="text-xs-center institution-members">
             {{ props.item.members }}
           </td>
           <!-- <td

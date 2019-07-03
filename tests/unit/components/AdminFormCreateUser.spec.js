@@ -33,7 +33,7 @@ const store = new Vuex.Store({
 
 const $route = {}
 
-describe('Institution', () => {
+describe('AdminFormCreateUser', () => {
   it('renders the component, and it is a div with class "user-form"', () => {
     const wrapper = shallowMount(AdminFormCreateUser, { localVue, store, mocks: { $route } })
     expect(wrapper.is('.user-form')).to.equal(true)

@@ -45,7 +45,7 @@ const $route = {
   },
 }
 
-describe('Institution', () => {
+describe('Offer', () => {
   it('renders the component, and it is a div with class "show", within it a div with id offer', () => {
     const wrapper = shallowMount(Offer, { localVue, store, mocks: { $route } })
     expect(wrapper.is('div.show')).to.equal(true)
